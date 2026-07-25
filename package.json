@@ -1,0 +1,43 @@
+{
+  "name": "nash-gorod-bratsk",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "scripts": {
+    "postinstall": "node scripts/ensure-typescript-compat.cjs",
+    "predev": "node scripts/ensure-typescript-compat.cjs",
+    "dev": "next dev",
+    "prebuild": "node scripts/ensure-typescript-compat.cjs",
+    "build": "tsc --noEmit && next build",
+    "start": "next start",
+    "lint": "tsc --noEmit && eslint .",
+    "lint:fix": "eslint . --fix && tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "5.4.0",
+    "lucide-react": "1.24.0",
+    "motion": "12.42.2",
+    "next": "16.2.10",
+    "nodemailer": "9.0.3",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "react-hook-form": "7.81.0",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "4.3.2",
+    "@types/node": "^24.0.0",
+    "@types/nodemailer": "8.0.1",
+    "@types/react": "19.2.17",
+    "@types/react-dom": "^19.2.0",
+    "eslint": "10.7.0",
+    "eslint-config-next": "16.2.10",
+    "tailwindcss": "4.3.2",
+    "typescript": "7.0.2",
+    "vitest": "4.1.10"
+  }
+}

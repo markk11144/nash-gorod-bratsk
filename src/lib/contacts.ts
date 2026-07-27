@@ -37,10 +37,11 @@ export function getTelHref(phone = company.phone.e164): string {
 
 export function getSiteUrl(): URL {
   const configured = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  const productionUrl = "https://nash-gorod-bratsk.vercel.app";
   try {
-    return new URL(configured || "http://localhost:3000");
+    return new URL(configured || productionUrl);
   } catch {
-    return new URL("http://localhost:3000");
+    return new URL(productionUrl);
   }
 }
 

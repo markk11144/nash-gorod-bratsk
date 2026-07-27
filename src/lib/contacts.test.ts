@@ -1,5 +1,12 @@
-import { describe, expect, it } from "vitest";
-import { formatRussianPhoneInput, getTelHref, maskPhone, normalizeRussianPhone } from "@/lib/contacts";
+import { afterEach, describe, expect, it } from "vitest";
+import { formatRussianPhoneInput, getSiteUrl, getTelHref, maskPhone, normalizeRussianPhone } from "@/lib/contacts";
+
+const originalSiteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+
+afterEach(() => {
+  if (originalSiteUrl === undefined) delete process.env.NEXT_PUBLIC_SITE_URL;
+  else process.env.NEXT_PUBLIC_SITE_URL = originalSiteUrl;
+});
 
 describe("phone helpers", () => {
   it.each([
@@ -22,5 +29,13 @@ describe("phone helpers", () => {
   it("builds safe display helpers", () => {
     expect(getTelHref()).toBe("tel:+79027653600");
     expect(maskPhone("+79027653600")).toBe("+790 ••• ••-00");
+  });
+
+  it("uses the production site URL when the environment variable is absent or invalid", () => {
+    delete process.env.NEXT_PUBLIC_SITE_URL;
+    expect(getSiteUrl().origin).toBe("https://nash-gorod-bratsk.vercel.app");
+
+    process.env.NEXT_PUBLIC_SITE_URL = "not-a-url";
+    expect(getSiteUrl().origin).toBe("https://nash-gorod-bratsk.vercel.app");
   });
 });
